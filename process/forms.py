@@ -1,6 +1,20 @@
 from django import forms
 from process.models import *
+import random
+from process.utils import sendtextmessage
 
-class RegistrationModel(forms.ModelForm):
+
+class RegistrationForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean_otp(self):
+        cno = self.cleaned_data['contact']
+        # otp = self.cleaned_data['otp']
+        otp = random.randint(100000, 999999)
+        message = "Welcome to RMS this is Your OTP" + str('otp')
+        sendtextmessage(message, cno)
+        return otp
+
     class Meta:
-        exclude=('otp')
+        model = RegistrationModel
+        exclude = ('status',)

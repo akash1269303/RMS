@@ -18,5 +18,9 @@ from django.urls import path
 from process import views
 urlpatterns = [
     path('', views.showindex,name='main'),
-    path('registration/',views.registration,name='registration')
+    path('registration/',views.registration,name='registration'),
+
+
+    path('otp/',views.otp,name='otp'),
+
 ]
